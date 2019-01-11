@@ -1,33 +1,37 @@
 
 var nbreBouton = 11;
 
+let modal = document.getElementById('simpleModal1');
+let closeBtn = document.getElementById('closeBtn1');
+
+
  for(var i = 1; i<=nbreBouton; i++ ){
+     console.log(i);
      // prendre l element module 
-    var modal = document.getElementById('simpleModal'+i);
+    
     //prendre le boutton
     var modalBtn = document.getElementById('modalBtn'+i);
     //fermer le boutton
-    var closeBtn = document.getElementById('closeBtn'+i);
+
+
     //ecoute du boutton
-    modalBtn.addEventListener('click',openModal);
+    modalBtn.addEventListener('click',(event) => {
+        const id = event.srcElement.id.substr(8);
+        const src = "assets/fichierclient/index" + id + ".html";
+        console.log(src);
+        document.getElementById('frame').src =src;
+        modal.style.display ='block';
+    });
+
     // ecoute de boutton pour la fermeture
-    closeBtn.addEventListener('click',closeModal);
+    closeBtn.addEventListener('click',() => {
+        modal.style.display='none';
+    });
+
     //ecoute de click exterieur
-    window.addEventListener('click',clickOutside);
- }
- // FONCTION
- //fonction ouverir le modal
- function openModal(){
-     modal.style.display ='block';
- }
- //fonction pour fermer le modal 
- function closeModal(){
-     modal.style.display='none';
- }
- //fonction clique exterieure pour dernier modal 
- function clickOutside(e){
-     if(e.target == modal){
-         modal.style.display ='none';
-     }
  }
 
+ let closeOutside = document.getElementById('simpleModal1')
+closeOutside.addEventListener('click',() =>{
+    modal.style.display ='none';
+});
